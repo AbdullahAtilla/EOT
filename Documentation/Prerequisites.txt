@@ -1,0 +1,176 @@
+###################################################
+###           EOT (Eye Of the Tiger) 		###
+### INSTALLATION OF REQUIRED TOOLS && LIBRARIES ###
+###################################################
+
+
+##PREREQUISITES
+
+**Installation of required tools and libraries explained below. (For Ubuntu)*****
+**The installation contains 20 easy steps;
+
+
+1) First, refresh and upgrade preinstalled libraries;
+
+	$ sudo apt-get update
+	$ sudo apt-get upgrade
+
+
+2) Then, install required tools;
+	
+	$ sudo apt-get install build-essential cmake pkg-config
+
+
+3) Due to 'opencv' is an image processing and computer vision library, we need to
+install various image file formats libraries;
+
+	$ sudo apt-get install libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev
+
+
+4) Also, install packages used to process video streams and access frames from cameras;
+
+	$ sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+	$ sudo apt-get install libxvidcore-dev libx264-dev
+
+5) GTK library is also required;
+
+	$ sudo apt-get install libgtk-3-dev
+
+
+6) Then, install libraries that are used to optimize various functionalities inside OpenCV;
+
+	$ sudo apt-get install libatlas-base-dev gfortran
+
+
+7) Python development libraries;
+
+	$ sudo apt-get install python2.7-dev python3.5-dev
+ 
+
+
+***Download OpenCV Source***
+***
+
+8) OpenCV source code from github;
+ 
+	$ cd ~
+	$ wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.1.0.zip
+	$ unzip opencv.zip
+
+
+9) Also, you need to 'opencv_contrib' repository;
+
+	$ wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.1.0.zip
+	$ unzip opencv_contrib.zip
+
+
+
+***Setup Python Environment***
+***
+
+10) install Python Package Manager (pip) ;
+
+	$ cd ~
+	$ wget https://bootstrap.pypa.io/get-pip.py
+	$ sudo python get-pip.py 
+
+
+11) Setup virtual environment;
+
+	$ sudo pip install virtualenv virtualenvwrapper
+	$ sudo rm -rf ~/get-pip.py ~/.cache/pip
+
+
+12) Once, virtualenv and virtualwrapper installed, you need to update your ~/.bashrc file
+
+	export WORKON_HOME=$HOME/.virtualenvs
+	source /usr/local/bin/virtualenvwrapper.sh
+
+
+	more simple solution, 
+
+	$ echo -e "\n# virtualenv and virtualenvwrapper" >> ~/.bashrc
+	$ echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.bashrc
+	$ echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
+
+
+13) After editing ~/.bashrc file, you need to reload the changes;
+
+	$ source ~/.bashrc
+
+
+***Creating python virtual environment***
+***
+
+14) 
+	 	
+	$ mkvirtualenv cv -p python3  ##If you decide to use Python2.7 change the command as python2
+
+
+15) Access your virtual environment named 'cv';
+
+	$ workon cv  ##If you want to quit working on virtual environment, type $ deactivate
+
+
+16) Install NumPy into your Python virtual environment;
+
+	$ workon cv
+	$ pip install numpy
+
+
+
+17) If you are you are in the 'cv' (virtual environment) now setup and configure your build using CMake;
+
+	$ cd ~/opencv-3.1.0/
+	$ mkdir build
+	$ cd build
+	$ cmake -D CMAKE_BUILD_TYPE=RELEASE \
+	    -D CMAKE_INSTALL_PREFIX=/usr/local \
+	    -D INSTALL_PYTHON_EXAMPLES=ON \
+	    -D INSTALL_C_EXAMPLES=OFF \
+	    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.1.0/modules \
+	    -D PYTHON_EXECUTABLE=~/.virtualenvs/cv/bin/python \
+	    -D BUILD_EXAMPLES=ON ..
+
+
+18) If CMake command exited without any errors, you can now compile OpenCV; (This will take a while..)
+
+	$ make -j4   ## '-j' switch controls the number of processes to be used when compiling OpenCV 
+		     ##you’ll want to set this value to the number of processors/cores on your machine. 
+
+
+19) If the last command executed without any error; Now, you can ready actually install OpenCV;
+
+	$ sudo make install
+	$ sudo ldconfig 
+
+20) And the last step; 
+
+	$ cd /usr/local/lib/python3.5/site-packages/
+	$ sudo mv cv2.cpython-35m-x86_64-linux-gnu.so cv2.so ##If you receive an error as "No such file or directory" at this command;
+							     ##Check the files in the directory with "$ ls" and type the file name instead
+							     ## "$ sudo mv <your file name> cv2.so"
+
+    Now you just need to sym-link your OpenCV bindings into the 'cv' virtual environment for Python3.5;
+
+	$ cd ~/.virtualenvs/cv/lib/python3.5/site-packages/
+	$ ln -s /usr/local/lib/python3.5/site-packages/cv2.so cv2.so
+
+
+
+
+
+
+********** That's all ! *************
+**********
+
+***Now you can delete the unnecessary .zip files but before this, ensure that the installations complete successfully!
+
+	$ cd ~
+	$ rm -rf opencv-3.1.0 opencv_contrib-3.1.0 opencv.zip opencv_contrib.zip
+
+
+
+
+
+

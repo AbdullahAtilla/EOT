@@ -1,0 +1,121 @@
+##############################
+##  EOT (Eye Of the Tiger) ### 
+## === POSSIBLE ERRORS === ###
+##############################
+
+
+
+*****Before look for solutions, ensure that you have complete all installations explained on the
+***  ' Prerequisites.txt ' successfully. Also, ensure that you are working on
+***  virtual environment. If you complete installations on the 'Prerequisites.txt'
+***  you have to type ' $ workon cv ' on the terminal to work on the virtual environment.
+
+
+
+
+:::::::::::::::::::::::::::
+:::::POSSIBLE ERRORS:::::::
+:::::::::::::::::::::::::::
+##############################################################################################
+
+Error:: "VIDEOIO ERROR: V4L2: Pixel format of incoming image is unsupported by OpenCV" :
+
+
+Possible :: 
+Solution ::: If you are using a USB Webcam check your camera is supported;
+	     Check your camera model via this command;
+
+		$ lsusb  ##Here find your USB camera model then, 
+			 ##check that model is supported from the link given below;
+
+	     "	http://elinux.org/RPi_USB_Webcams "
+
+	     If your model does not supported, use a supported model.
+
+	     If your model is supported, ensure that the camera is not busy by any other. 
+
+
+
+###############################################################################################
+
+Error:: " ImportError: No module named 'cv2' " : 
+
+
+Possible ::
+Solution ::: This error may occurs by two possible reasons; 
+	     #First reason;
+		 OpenCV has not installed successfully; 
+	      If you have not install OpenCV successfully, you should
+	      follow the steps explained in the 'Prerequisites.txt' file.
+	     
+
+	     #Second reason;
+		 Python cannot refer to your default site-packages folder where 
+	      you have kept the required python files or libraries;
+		
+		 Add these lines in the code:
+
+	      import sys
+	      sys.path.append('/usr/local/lib/python2.7/site-packages')	##For python2.7
+	  	
+	      ###If you use python3.5, use the lines given below instead;
+	      import sys
+	      sys.path.append('/usr/local/lib/python2.7/site-packages') ##For python3.5
+
+
+	      Before try this solution, ensure that there is 'cv2.so' file in the given path.
+	      ' /usr/local/lib/python2.7/site-packages ' or
+	      ' /usr/local/lib/python3.5/site-packages '
+
+
+
+################################################################################################
+		
+Error:: " ImportError: No module named 'mysql' "  :
+
+Possible ::
+Solution ::: Use 'pip' to search available module;
+
+	     $ pip search mysql-connector | grep --color mysql-connector-python
+
+
+	     And the output will be like;
+	
+	     mysql-connector-python-rf (2.2.2)        - MySQL driver written in Python
+	     mysql-connector-python (2.0.4)           - MySQL driver written in Python
+	 
+
+	     After that, type ;   ##Install the 'mysql-connector-python-rf'
+	    
+             $ pip install mysql-connector-python-rf  
+
+
+	     Verify;
+	     $ python
+
+		#Python 2.7.11 (default, Apr 26 2016, 13:18:56)
+		#[GCC 4.1.2 20080704 (Red Hat 4.1.2-54)] on linux2
+		#Type "help", "copyright", "credits" or "license" for more information.
+
+	     >>> import mysql.connector
+             >>>
+
+
+	     That will solve the problem.
+
+
+
+###################################################################################################
+
+Error:: " VIDEOIO ERROR: 4VL: index 1 is not correct!
+	  Corrupt JPEG data: 1 extraneous bytes before marker 0xd0 "
+
+
+Solution:: This is an expected error and it does not affect to program.
+	   This error may occur because the program search for available camera port.
+	   The program first checkout the port 1, if you are using port 0, the program give error for
+	   port 1, but then it will use the port 0.
+
+
+
+####################################################################################################
