@@ -123,3 +123,7 @@ VALUES (601, 'Can not connect to database!');
 INSERT INTO Unit(u_type) VALUES ('kWh');
 INSERT INTO Unit(u_type) VALUES ('m3');
 INSERT INTO Unit(u_type) VALUES ('lt');
+
+##Add sample data;
+INSERT INTO Location(address) VALUES('OnurEnerjiEGE');
+INSERT INTO Camera(node, locationID) VALUES(1, 1);

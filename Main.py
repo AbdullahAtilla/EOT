@@ -32,7 +32,7 @@ def main():
     # end if
 
     photo_path = CamManager.get_image() ##open camera and capture image
-    imgOriginalScene  = cv2.imread("ts/2.jpeg")  # open captured image from directory
+    imgOriginalScene  = cv2.imread("captured_img/last.jpg")  # open captured image from directory
 
 
     if imgOriginalScene is None:                            # if image was not read successfully

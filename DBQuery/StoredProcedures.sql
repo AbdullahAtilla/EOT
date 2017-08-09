@@ -39,3 +39,4 @@ USE EOT_DATA;
    END //
  DELIMITER ;
  
+ #CALL display_measurement_data();
