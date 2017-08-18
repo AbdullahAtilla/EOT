@@ -5,10 +5,10 @@ import os.path
 
 ##This function check whether usb camera is available, if not, it use the integrated camera.
 def camChoise():
-	if cv2.VideoCapture(1).isOpened(): #first check usb camera
-		return 1  #if it is available, use port 1 (usb camera)
+	if cv2.VideoCapture(0).isOpened(): #first check integrated camera
+		return 0  #if it is available, use port 1 (integrated camera)
 	else:
-		return 0  #if not, use port 0 (integrated camera)
+		return 1  #if not, use port 1 (usb camera)
 ## end of the function
 ############################################################################################
 
