@@ -11,6 +11,7 @@ import CamManager
 import threading
 import DBManager
 from datetime import datetime
+import ConfigManager
 
 # module level variables ##########################################################################
 SCALAR_BLACK = (0.0, 0.0, 0.0)
@@ -21,7 +22,8 @@ SCALAR_RED = (0.0, 0.0, 255.0)
 ###################################################################################################
 def main():
 
-    threading.Timer(5.0, main).start()    ## called main() function every 5 seconds
+    timeInterval = int(ConfigManager.ConfigSectionMap("Basic_Conf")['timeinterval']) ##Assign time interval into variable from config/config.ini file
+    threading.Timer(timeInterval, main).start()    ## called main() function every 'timeInterval' seconds
     
     cv2.useOptimized();
     blnKNNTrainingSuccessful = DetectChars.loadKNNDataAndTrainKNN()         # attempt KNN training
