@@ -87,7 +87,7 @@ http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_ml/py_knn
 
 
 
-::Manuel Usage
+::Manual Usage
 :::::::::::::::
 After complete all the installations on the Prerequisites.txt successfully, you can launch the program from the terminal
 by type;
