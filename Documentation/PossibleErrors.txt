@@ -119,3 +119,14 @@ Solution:: This is an expected error and it does not affect to program.
 
 
 ####################################################################################################
+
+Error:: " Capture image is not successful ! "
+
+
+Possible
+Solution:: This error occurs when camera is not accessible. Check the camera is not busy by any other process.
+	   Try to reboot machine or insert the camera any other port. 
+
+
+
+

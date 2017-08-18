@@ -173,4 +173,35 @@ install various image file formats libraries;
 
 
 
+#####################################
+##           DATABASE              ##
+#####################################
+
+*** EOT use 'MYSQL' as database. If you do not have mysql, you can install by type;
+
+       $ sudo apt-get update  ##update before installation
+       $ sudo apt-get install mysql-server ##install mysql server
+       $ sudo mysql_secure_installation  ##secure installation
+
+
+	After complete installation successfully, run the queries in the 'DBQuery' folder;
+	first 'dbquery.sql'  ##It creates database and tables. Also insert some basic informations.
+	then  'StoredProcedures.sql'  ##It creates stored procedures 
+
+
+    You can display the all information about measurement by calling 'display_measurement_data()' procedure. 
+    To do this type in Mysql;
+
+        CALL display_measurement_data()
+
+
+ 
+###############################
+##	CONFIGURATION        ##
+###############################
+
+
+***
+
+
 

@@ -8,6 +8,8 @@ EOT is an computer vision project that aimed reading data on the counters and me
 After complete installations written on the 'Prerequisites.txt' successfully,
 you can run the program via terminal by type; 
 	
+	'$ workon cv '
+	'$ cd eot/directory/path
 	'$ python Main.py'
 
 
@@ -79,7 +81,67 @@ http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_ml/py_knn
 
 
 
+###############
+##  USAGE    ##
+###############
 
+
+
+::Manuel Usage
+:::::::::::::::
+After complete all the installations on the Prerequisites.txt successfully, you can launch the program from the terminal
+by type;
+
+	$ python Main.py
+
+
+::Launch on startup automatically
+::::::::::::::::::::::::::::::::::
+If you want to launch program automatically after boot;
+You should follow this steps;
+
+1) Launch 'Startup Applications' from Dash,
+2) Click on 'add',
+3) Type 'EOT' on the name field
+4) Browse and select 'EOT_init.sh' on the EOT folder.
+5) Type a description you want ("Start EOT at boot time" etc.)
+6) Save and quit
+
+For details, visit;
+https://www.howtoforge.com/tutorial/how-to-use-startup-applications-on-ubuntu/ 
+
+
+
+::::COMMANDS
+:::::::::::::::::::::
+
+
+	$ python Main.py   ##Start EOT
+
+	$ python settings.py -h   ## Display help
+
+	$ python settings.py -c   ## Show configuration options
+
+	$ python settings.py -dbu <username>   ## Set database user as <username>
+					       ## For example; $ python settings.py -dbu root >>> set database user as 'root'
+
+	$ python settings.py -dbp <password>   ## Set database password as <password>
+					       ## For example; $ python settings.py -dbp 1234.aB
+
+	$ python settings.py -dbh <host>    ## Set host as <host>
+					    ## For example; $ python settings.py -dbh 127.0.0.1  >>> set host as 127.0.0.1		
+
+	$ python settings.py -loc <location>   ## Set camera location as <location>
+					       ## For example; $ python settings.py -loc Teknopark
+
+	$ python settings.py -n <node>   ## Set camera node as <node> (This field must be an integer)
+					 ##For example; $ python settings.py -n 5 >>> camera node 5
+
+	$ python settings.py -u <unit>   ## Set measurement unit as <unit>
+					 ## For example; $ python settings.py -u kWh
+
+	$ python settings.py -ti <timeInterval>   ## Set time interval (seconds) to capture image as <timeInterval> (This field must be an integer)
+						  ## For example;  $ python settings.py -ti 10 >>> capture image every 10 seconds.
 
 
 
