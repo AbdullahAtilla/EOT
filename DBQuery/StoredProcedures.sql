@@ -39,4 +39,8 @@ USE EOT_DATA;
    END //
  DELIMITER ;
  
- #CALL display_measurement_data();
+ call display_measurement_data();
+ DROP PROCEDURE IF EXISTS display_measurement_data;
+ 
+ 
+     
