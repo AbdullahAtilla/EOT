@@ -1,5 +1,13 @@
 USE EOT_DATA;
 
+SELECT * FROM Measurement;
+SELECT * FROM Photo;
+SELECT * FROM MStatus ORDER BY statCode ASC;
+SELECT * FROM Camera;
+SELECT * FROM Location;
+
+
+##Reset tables
 SET SQL_SAFE_UPDATES = 0;
 DELETE FROM Measurement;
 DELETE FROM Photo;
