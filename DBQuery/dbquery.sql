@@ -58,7 +58,7 @@ CREATE TABLE Measurement( ##This table keep data which obtained from measurement
 	ID 			INTEGER 	  NOT NULL AUTO_INCREMENT PRIMARY KEY,
     m_time 		TIMESTAMP	  NOT NULL, ##Keep data measurement time
 	statusID	INTEGER		  NOT NULL, ##Keep status of data. 
-    m_data		INTEGER 	  ZEROFILL, ##Keep the recognized data.
+    m_data		INTEGER		  , ##Keep the recognized data.
     unitID		INTEGER		  , ##Data unit (Eg. 'kWh', '°C' etc.)
     photoID		INTEGER		  ,	##Related photo which obtained data from.
     
@@ -123,7 +123,3 @@ VALUES (601, 'Can not connect to database!');
 INSERT INTO Unit(u_type) VALUES ('kWh');
 INSERT INTO Unit(u_type) VALUES ('m3');
 INSERT INTO Unit(u_type) VALUES ('lt');
-
-##Add sample data;
-INSERT INTO Location(address) VALUES('OnurEnerjiEGE');
-INSERT INTO Camera(node, locationID) VALUES(1, 1);
