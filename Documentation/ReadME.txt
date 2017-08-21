@@ -103,7 +103,7 @@ You should follow this steps;
 1) Launch 'Startup Applications' from Dash,
 2) Click on 'add',
 3) Type 'EOT' on the name field
-4) Browse and select 'EOT_init.sh' on the EOT folder.
+4) Browse and select 'start.sh' on the EOT folder.
 5) Type a description you want ("Start EOT at boot time" etc.)
 6) Save and quit
 
