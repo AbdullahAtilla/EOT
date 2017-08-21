@@ -29,7 +29,9 @@ USE EOT_DATA;
         (SELECT u_type FROM Unit WHERE ID = Measurement.unitID)
 	AND
 		Location.address IN
-        (SELECT address FROM Location WHERE ID = Camera.locationID)
+        (SELECT address FROM Location WHERE ID IN
+        (SELECT locationID FROM Camera WHERE ID IN
+        (SELECT ID FROM Camera WHERE ID = Photo.cameraID)))
 	AND
 		Camera.node IN
         (SELECT node FROM Camera WHERE ID = Photo.cameraID)
@@ -39,8 +41,8 @@ USE EOT_DATA;
    END //
  DELIMITER ;
  
- call display_measurement_data();
- DROP PROCEDURE IF EXISTS display_measurement_data;
+ ##call display_measurement_data();
+ ##DROP PROCEDURE IF EXISTS display_measurement_data;
  
  
      
