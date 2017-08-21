@@ -123,3 +123,4 @@ VALUES (601, 'Can not connect to database!');
 INSERT INTO Unit(u_type) VALUES ('kWh');
 INSERT INTO Unit(u_type) VALUES ('m3');
 INSERT INTO Unit(u_type) VALUES ('lt');
+INSERT INTO Unit(u_type) VALUES ('NA');
