@@ -26,18 +26,18 @@ def get_image():
 	imgID = 1 #give id to images for save into folder
 
 
-	while os.path.exists('captured_img/%d.jpg' % (imgID)): #check the image with its name exist in folder
+	while os.path.exists('captured_img/%d.png' % (imgID)): #check the image with its name exist in folder
 		imgID = imgID + 1 #if exist, try with new name
 
 
 	if success:
-		cv2.imwrite('captured_img/%d.jpg' % (imgID), frame) ##save image backup to the path
-		cv2.imwrite('captured_img/last.jpg', frame) ##save the current image to the path
+		cv2.imwrite('captured_img/%d.png' % (imgID), frame) ##save image backup to the path
+		cv2.imwrite('captured_img/last.png', frame) ##save the current image to the path
 		cv2.waitKey(200)
 
 		cap.release() # When everything done, release the capture
 		cv2.destroyAllWindows()
 
-	return str('captured_img/%d.jpg' % (imgID))
+	return str('captured_img/%d.png' % (imgID))
 ###### end of the function
 #################################################################################################
