@@ -7,7 +7,6 @@
 ##PREREQUISITES
 
 **Installation of required tools and libraries explained below. (For Ubuntu)*****
-**The installation contains 20 easy steps;
 
 
 1) First, refresh and upgrade preinstalled libraries;
@@ -144,19 +143,23 @@ install various image file formats libraries;
 	$ sudo make install
 	$ sudo ldconfig 
 
-20) And the last step; 
+20) Then; 
 
 	$ cd /usr/local/lib/python3.5/site-packages/
 	$ sudo mv cv2.cpython-35m-x86_64-linux-gnu.so cv2.so ##If you receive an error as "No such file or directory" at this command;
 							     ##Check the files in the directory with "$ ls" and type the file name instead
 							     ## "$ sudo mv <your file name> cv2.so"
 
-    Now you just need to sym-link your OpenCV bindings into the 'cv' virtual environment for Python3.5;
+    ##Now you just need to sym-link your OpenCV bindings into the 'cv' virtual environment for Python3.5;
 
 	$ cd ~/.virtualenvs/cv/lib/python3.5/site-packages/
 	$ ln -s /usr/local/lib/python3.5/site-packages/cv2.so cv2.so
 
 
+
+21) Install ConfigParser package for configurations:
+	
+	$ sudo pip install ConfigParser
 
 
 
@@ -168,6 +171,9 @@ install various image file formats libraries;
 
 	$ cd ~
 	$ rm -rf opencv-3.1.0 opencv_contrib-3.1.0 opencv.zip opencv_contrib.zip
+
+
+
 
 
 
@@ -193,15 +199,6 @@ install various image file formats libraries;
     To do this type in Mysql;
 
         CALL display_measurement_data()
-
-
- 
-###############################
-##	CONFIGURATION        ##
-###############################
-
-
-***
 
 
 
