@@ -1,14 +1,15 @@
 import cv2
+import time
 import os.path
 
 
 
 ##This function check whether usb camera is available, if not, it use the integrated camera.
 def camChoise():
-	if cv2.VideoCapture(0).isOpened(): #first check integrated camera
-		return 0  #if it is available, use port 1 (integrated camera)
+	if cv2.VideoCapture(1).isOpened(): #first check usb camera
+		return 1  #if it is available, use port 1 (usb camera)
 	else:
-		return 1  #if not, use port 1 (usb camera)
+		return 0  #if not, use port 1 (integrated camera)
 ## end of the function
 ############################################################################################
 
@@ -18,6 +19,7 @@ def camChoise():
 def get_image():
 	cap = cv2.VideoCapture(camChoise()) ##open the camera 
 	# Capture frame-by-frame
+	time.sleep(0.1) ##allow the camera to warmup
 	success, frame = cap.read()
 	
 	# do what you want with frame here
