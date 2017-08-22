@@ -7,7 +7,7 @@ import os
 import DetectChars
 import DetectPlates
 import PossiblePlate
-import CamManager
+import PiCamManager
 import threading
 import DBManager
 from datetime import datetime
@@ -33,7 +33,7 @@ def main():
         return                                                          # and exit program
     # end if
 
-    photo_path = CamManager.get_image() ##open camera and capture image
+    photo_path = PiCamManager.get_Pimage() ##open camera and capture image
     imgOriginalScene  = cv2.imread("captured_img/last.png")  # open captured image from directory
 
 
