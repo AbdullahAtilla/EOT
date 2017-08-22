@@ -32,9 +32,9 @@ def get_Pimage():
 	##end while
 
 	##Save image into folder
-	cv2.imwrite('captured_img/%d.png' % (imgID), frame) 
+	cv2.imwrite('captured_img/%d.png' % (imgID), image) 
 	
-	cv2.imwrite('captured_img/last.png', frame)
+	cv2.imwrite('captured_img/last.png', image)
 
 	return str('captured_img/%d.png' % (imgID))
 
