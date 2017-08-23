@@ -8,6 +8,7 @@ parser.add_argument('-c',  '--config',       help='Display Configurations', requ
 parser.add_argument('-dbu','--dbuser',       help='Set database user [ python settings.py -dbu <username> ]',     required=False, action='store',type=str) ##Create new argument '-dbu or --dbuser'
 parser.add_argument('-dbp','--dbpassword',   help='Set database password [ python settings.py -dbp <password> ]', required=False, action='store', type=str) ##Create new argument '-dbp or --dbpassword'
 parser.add_argument('-dbh','--dbhost',       help='Set database host [ python settings.py -dbh <host> ]', required=False, action='store', type=str) ##Create new argument '-dbh or --dbhost'
+parser.add_argument('-dbn','--dbname',       help='Set database name [ python settings.py -dbn <databasename> ]', required=False, action='store', type=str) ##Create new argument '-dbn or --dbname'
 parser.add_argument('-loc','--location',     help='Set camera location [ python settings.py -loc <location address> ]', required=False, action='store', type=str) ##Create new argument '-loc or --location'
 parser.add_argument('-n',  '--node',         help='Set camera node [ python settings.py -n <CameraNode> ]', required=False, action='store', type=int) ##Create new argument '-n or --node'
 parser.add_argument('-u',  '--unit',         help='Set measurement unit [ python settings.py -u <unit> ]',  required=False, action='store', type=str) ##Create new argument '-u or --unit'
@@ -24,6 +25,7 @@ if args.config:   ##If config argument choosen
    dbuser       = ConfigManager.ConfigSectionMap("Basic_Conf")['databaseuser'] ##Assign DB username from config/config.ini file  into variable 'dbuser'
    dbpass       = ConfigManager.ConfigSectionMap("Basic_Conf")['databasepass'] ##Assign DB password from config/config.ini file  into variable 'dbpass'
    dbhost       = ConfigManager.ConfigSectionMap("Basic_Conf")['host']     ##Assign DB host from config/config.ini file  into variable 'dbhost'
+   dbname       = ConfigManager.ConfigSectionMap("Basic_Conf")['databasename']     ##Assign DB name from config/config.ini file  into variable 'dbname'
    location     = ConfigManager.ConfigSectionMap("Basic_Conf")['location'] ##Assign Location address from config/config.ini file into variable 'location'
    camNode      = ConfigManager.ConfigSectionMap("Basic_Conf")['cameranode'] ##Assign Camera node type from config/config.ini file into variable 'camNode'
    unit         = ConfigManager.ConfigSectionMap("Basic_Conf")['unit']     ##Assign Unit type from config/config.ini file into variable 'unit'
@@ -31,7 +33,7 @@ if args.config:   ##If config argument choosen
 
    ##Print configuration
    print("\n==================================")
-   print("Database User: " +dbuser+ "\nDatabase Pass: " +dbpass+ "\nHost: " +dbhost+ "\nLocation: " +location+ "\nCameraNode: " +camNode+ "\nUnit: " +unit+ "\nTime Interval: " +timeInterval)
+   print("Database User: " +dbuser+ "\nDatabase Pass: " +dbpass+ "\nHost: " +dbhost+ "\nDatabaseName: " +dbname+ "\nLocation: " +location+ "\nCameraNode: " +camNode+ "\nUnit: " +unit+ "\nTime Interval: " +timeInterval)
    print("==================================\n")
 
 
@@ -74,6 +76,19 @@ elif args.dbhost:
    ##Print database host
    print("\n==================================")
    print("Host: " +dbhost)
+   print("==================================\n")
+
+
+###################
+elif args.dbname:
+
+   ConfigManager.setConfigOption('Basic_Conf','databasename', args.dbname) ## Set database name with new value
+
+   dbname = ConfigManager.ConfigSectionMap("Basic_Conf")['databasename'] ##Assign DB name from config/config.ini file  into variable 'dbname'
+  
+   ##Print database host
+   print("\n==================================")
+   print("DatabaseName: " +dbname)
    print("==================================\n")
 
 
