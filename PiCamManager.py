@@ -15,11 +15,12 @@ def get_Pimage():
 	rawCapture = PiRGBArray(camera)
 
 	##Allow the camera to warmup
-	time.sleep(0.1)
+	time.sleep(2)
 
 	##Grab image from the camera
 	camera.capture(rawCapture, format="bgr")
 	image = rawCapture.array
+	camera.close()
 
 	#give id to images for save into folder
 	imgID = 1 
