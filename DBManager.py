@@ -10,7 +10,7 @@ config = {
 	'user'             : ConfigManager.ConfigSectionMap("Basic_Conf")['databaseuser'],
 	'password'         : ConfigManager.ConfigSectionMap("Basic_Conf")['databasepass'],
 	'host'             : ConfigManager.ConfigSectionMap("Basic_Conf")['host'],
-	'database'         : 'EOT_DATA',
+	'database'         : ConfigManager.ConfigSectionMap("Basic_Conf")['databasename'],
 	'raise_on_warnings': True,
 }
 
