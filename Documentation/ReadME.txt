@@ -131,6 +131,9 @@ https://www.howtoforge.com/tutorial/how-to-use-startup-applications-on-ubuntu/
 	$ python settings.py -dbh <host>    ## Set host as <host>
 					    ## For example; $ python settings.py -dbh 127.0.0.1  >>> set host as 127.0.0.1		
 
+	$ python settings.py -dbn <databasename>    ## Set database name as <databasename>
+					    ## For example; python settings.py -dbn EOT_DATA >>> set database name as EOT_DATA
+
 	$ python settings.py -loc <location>   ## Set camera location as <location>
 					       ## For example; $ python settings.py -loc Teknopark
 
