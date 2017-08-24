@@ -12,11 +12,13 @@ ADAPTIVE_THRESH_WEIGHT = 9
 ###################################################################################################
 
 def preprocess(imgOriginal):
-    imgGrayscale = extractValue(imgOriginal)
-    imgGrayscale = np.invert(imgGrayscale)
     
-    imgMaxContrastGrayscale = maximizeContrast(imgGrayscale)
+    imgGrayscale = extractValue(imgOriginal)
+    
+    imgGrayscale = np.invert(imgGrayscale)
 
+    imgMaxContrastGrayscale = maximizeContrast(imgGrayscale)
+    
     height, width = imgGrayscale.shape
 
     imgBlurred = np.zeros((height, width, 1), np.uint8)
