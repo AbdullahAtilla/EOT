@@ -1,13 +1,12 @@
 #######
 EOT
-
 #######
 
 EOT (Eye Of the Tiger) is a computer vision project that aimed reading data on the counters and meters. You can find all the instructions and explanations in the 'Documentation' folder.
 
 The application has two version; For computers and For Raspberry Pi.
 
-**If you want to use the application on your computer, clone 'master' branch. Otherwise, clone 'rpi' branch for your Raspberry Pi.
+If you want to use the application on your computer, clone 'master' branch. Otherwise, clone 'rpi' branch for your Raspberry Pi.
 
 The application has tested on Ubuntu on a laptop and Ubuntu MATE on a Raspberry Pi 3.
 
