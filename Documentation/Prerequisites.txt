@@ -1,10 +1,14 @@
 ###################################################
-###           EOT (Eye Of the Tiger) 		###
-### INSTALLATION OF REQUIRED TOOLS && LIBRARIES ###
+###           EOT (Eye Of the Tiger) 	     	###
+###               PREREQUISITES                 ###
 ###################################################
 
 
-##PREREQUISITES
+
+
+#########################
+## TOOLS AND LIBRARIES ##
+#########################
 
 **Installation of required tools and libraries explained below. (For Ubuntu)*****
 
@@ -199,6 +203,20 @@ install various image file formats libraries;
     To do this type in Mysql;
 
         CALL display_measurement_data()
+
+
+
+
+######################
+##      CAMERA      ##
+######################
+
+***The application has tested on Ubuntu 16.04 on Laptop and 
+Ubuntu MATE on Raspberry Pi 3 . 
+
+You can use an integrated or a usb camera on your computer but
+you should use an embedded Pi Camera if you use the application on Raspberry Pi.
+
 
 
 

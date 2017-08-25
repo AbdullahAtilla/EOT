@@ -21,7 +21,10 @@ you can run the program via terminal by type;
 
 ::: Camera 
 ::::::::::::::::::::::::::::::::
-An integrated camera or a USB camera is required for capture image. 
+An integrated camera or a USB camera is required for capture image.
+
+NOTE: If you use this application on Raspberry Pi you should use a 
+Raspberry Pi embedded camera module. 
 
 
 ::: Capture image 

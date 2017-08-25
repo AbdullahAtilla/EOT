@@ -127,6 +127,9 @@ Possible
 Solution:: This error occurs when camera is not accessible. Check the camera is not busy by any other process.
 	   Try to reboot machine or insert the camera any other port. 
 
+	   If you use the application on Raspberry Pi, you should use an embedded Pi Camera.
+	   If you use a usb camera with your Pi, this error may occur. 
+
 
 
 
