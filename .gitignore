@@ -1,0 +1,24 @@
+#Ignore everything in this directory
+*
+#Except this file
+!.gitignore
+!captured_img
+!config
+!DBQuery
+!Documentation
+!.git
+!CamManager.py
+!classifications.txt
+!flattened_images.txt
+!ConfigManager.py
+!DBManager.py
+!DetectChars.py
+!DetectPlates.py
+!Main.py
+!PossibleChar.py
+!PossiblePlate.py
+!Preprocess.py
+!README.md
+!settings.py
+!start.sh
+
