@@ -1,7 +1,13 @@
 import cv2
 import time
 import os.path
+import configparser
 
+config = configparser.RawConfigParser()
+config.read("config/config.ini")
+
+##This variable keeps info whether if captured images will store at file. 
+storeimg = bool(config.getboolean('Basic_Conf', 'storeimg'))
 
 
 ##This function check whether usb camera is available, if not, it use the integrated camera.
@@ -40,8 +46,11 @@ def get_image():
 
 
 	if success:
-		# save image backup to the path
-		cv2.imwrite('captured_img/%d.png' % (imgID), frame) 
+		##If store image option has true;
+		if storeimg == True:
+			# save image backup to the path
+			cv2.imwrite('captured_img/%d.png' % (imgID), frame)
+		##Then, 
 		# save the current image to the path
 		cv2.imwrite('captured_img/last.png', frame) 
 		cv2.waitKey(200)

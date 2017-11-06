@@ -20,6 +20,8 @@ parser.add_argument('-n',  '--node', help='Set camera node [ python settings.py 
 parser.add_argument('-u',  '--unit', help='Set measurement unit [ python settings.py -u <unit> ]', required=False, action='store', type=str) 
 ##Create new argument '-ti or --timeinterval'
 parser.add_argument('-ti', '--timeinterval', help='Set time interval that capture image [ python settings.py -ti <TimeInterval> ]', required=False, action='store', type=int) 
+##Create new argument '-stimg or --storeimage'
+parser.add_argument('-stimg', '--storeimage', help='Enable/Disable to store captured image [ python settings.py -stimg <true/false> ]', required=False, action='store', type=str) 
 
 
 
@@ -43,10 +45,12 @@ if args.config:   ##If config argument choosen
    unit         = ConfigManager.ConfigSectionMap("Basic_Conf")['unit']     
    ##Assign Time Interval from config/config.ini file into variable 'timeInterval'
    timeInterval = ConfigManager.ConfigSectionMap("Basic_Conf")['timeinterval'] 
+   ##Assign storeimg value from config/config.ini file into variable 'storeimg'
+   storeimg     = ConfigManager.ConfigSectionMap("Basic_Conf")['storeimg'] 
 
    ##Print configuration
    print("\n==================================")
-   print("Database User: " +dbuser+ "\nDatabase Pass: " +dbpass+ "\nHost: " +dbhost+ "\nLocation: " +location+ "\nCameraNode: " +camNode+ "\nUnit: " +unit+ "\nTime Interval: " +timeInterval)
+   print("Database User: " +dbuser+ "\nDatabase Pass: " +dbpass+ "\nHost: " +dbhost+ "\nLocation: " +location+ "\nCameraNode: " +camNode+ "\nUnit: " +unit+ "\nTime Interval: " +timeInterval+ "\nStore Image: " +storeimg)
    print("==================================\n")
 
 
@@ -151,3 +155,15 @@ elif args.timeinterval:
    print("==================================\n")
 
 
+
+###################
+elif args.storeimage:
+   ## Set storeimg with new value
+   ConfigManager.setConfigOption('Basic_Conf','storeimg', args.storeimage) 
+   ##Assign storeimg value from config/config.ini file into variable 'storeimg'
+   storeimageval = ConfigManager.ConfigSectionMap("Basic_Conf")['storeimg'] 
+   
+   ##Print storeimg
+   print("\n==================================")
+   print("Store Image: " +storeimageval)
+   print("==================================\n")
