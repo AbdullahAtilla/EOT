@@ -1,6 +1,7 @@
 #EOT ConfigManager
 
-import configparser ##import configparser library
+##import configparser library
+import configparser 
 
 
 
@@ -9,10 +10,13 @@ import configparser ##import configparser library
 ## Here is the function syntax;
 ## Config.ConfigSectionMap("Basic_Conf")['DatabaseUser']
 def ConfigSectionMap(section): ##Configuration selection map
+    
+    ##Assign configparser function to 'Config' variable
+    Config = configparser.ConfigParser() 
+    ##Read configs from config/config.ini file.
+    Config.read("config/config.ini")  
    
-    Config = configparser.ConfigParser() ##Assign configparser function to 'Config' variable
-    Config.read("config/config.ini")  ##Read configs from config/config.ini file.
-   
+
     dict1 = {}  ##Select conf in the section
     options = Config.options(section) ##Select section
     for option in options:
@@ -30,13 +34,17 @@ def ConfigSectionMap(section): ##Configuration selection map
 
 def setConfigOption(section, option, value):
     try:
-
-        Config = configparser.ConfigParser() ##Assign configparser function to 'Config' variable
-        Config.read("config/config.ini")  ##Read configs from config/config.ini file.
-
-        Config.set(section, option, str(value)) ##Set option with new value
-        cfgfile = open("config/config.ini", 'w') ##Open the config.ini file
-        Config.write(cfgfile) ## Write updated config into config.ini file 
+	##Assign configparser function to 'Config' variable
+        Config = configparser.ConfigParser() 
+        ##Read configs from config/config.ini file.
+        Config.read("config/config.ini") 
+	
+	##Set option with new value
+        Config.set(section, option, str(value)) 
+	##Open the config.ini file
+        cfgfile = open("config/config.ini", 'w') 
+	## Write updated config into config.ini file 
+        Config.write(cfgfile) 
         cfgfile.close() ## Close the file 
         print("Configuration has set successfully ..")
 

@@ -80,23 +80,27 @@ def insert_data(mtime, mdata, photoPath):
 	############
 	##QUERIES###
 	############
-	add_photo = ("INSERT INTO EOT_DATA.Photo (path, cameraID) VALUES (%(path)s , %(cameraid)s)") ##Insert photo query
 
-	selectPhotoID = ("SELECT ID FROM EOT_DATA.Photo WHERE Photo.path LIKE '%s'" % photoPath) ##Select photoID via its path query
-
-	selectStatID  = ("SELECT ID FROM EOT_DATA.MStatus WHERE MStatus.statCode = %d" % statcode) ##Select status ID via statCode query 
+	##Insert photo query
+	add_photo = ("INSERT INTO EOT_DATA.Photo (path, cameraID) VALUES (%(path)s , %(cameraid)s)") 
+	##Select photoID via its path query
+	selectPhotoID = ("SELECT ID FROM EOT_DATA.Photo WHERE Photo.path LIKE '%s'" % photoPath) 
+	##Select status ID via statCode query 
+	selectStatID  = ("SELECT ID FROM EOT_DATA.MStatus WHERE MStatus.statCode = %d" % statcode) 
 	##Insert measurement data query
 	add_measurement = ("INSERT INTO EOT_DATA.Measurement (m_time, statusID, m_data, unitID, photoID) VALUES (%(m_time)s, %(statusID)s, %(m_data)s, %(unitID)s , %(photoID)s)")
-
-	SelectUnitID = ("SELECT ID FROM EOT_DATA.Unit WHERE Unit.u_type LIKE '%s'" % unitType) ##Select unit ID via unit type
-	
-	SelectCameraID = ("SELECT ID FROM EOT_DATA.Camera WHERE Camera.node = %(node)s AND Camera.locationID = %(locationID)s") ##Select camera ID via camera node
-
-	SelectLocationID = ("SELECT ID FROM EOT_DATA.Location WHERE Location.address LIKE '%s'" % locationAddress) ##Select location ID via location address
-
-	add_camera = ("INSERT INTO EOT_DATA.Camera (node, locationID) VALUES (%(node)s , %(locationID)s)") ##Add new camera
-	add_location  = ("INSERT INTO EOT_DATA.Location (address) VALUES ('%s')" % locationAddress) ##Add new location
-	add_unit  = ("INSERT INTO EOT_DATA.Unit (u_type) VALUES ('%s')" % unitType) ##Add new unit
+	##Select unit ID via unit type
+	SelectUnitID = ("SELECT ID FROM EOT_DATA.Unit WHERE Unit.u_type LIKE '%s'" % unitType) 
+	##Select camera ID via camera node
+	SelectCameraID = ("SELECT ID FROM EOT_DATA.Camera WHERE Camera.node = %(node)s AND Camera.locationID = %(locationID)s") 
+	##Select location ID via location address
+	SelectLocationID = ("SELECT ID FROM EOT_DATA.Location WHERE Location.address LIKE '%s'" % locationAddress) 
+	##Add new camera
+	add_camera = ("INSERT INTO EOT_DATA.Camera (node, locationID) VALUES (%(node)s , %(locationID)s)") 
+	##Add new location
+	add_location  = ("INSERT INTO EOT_DATA.Location (address) VALUES ('%s')" % locationAddress) 
+	##Add new unit
+	add_unit  = ("INSERT INTO EOT_DATA.Unit (u_type) VALUES ('%s')" % unitType) 
 	##End Queries ######
 
 	try:
@@ -108,10 +112,13 @@ def insert_data(mtime, mdata, photoPath):
 		locationID_data = cursor.fetchone()
 		if locationID_data is None:
 			cursor.execute(add_location)
-			cursor.execute(SelectLocationID) ##Select camera ID
-			locationID = cursor.fetchone()[0] ##Assign photo ID into variable 'cameraID'
+			##Select camera ID
+			cursor.execute(SelectLocationID)
+			##Assign photo ID into variable 'cameraID'
+			locationID = cursor.fetchone()[0] 
 		elif locationID_data is not None:
-			locationID = locationID_data[0] ##Assign photo ID into variable 'cameraID'
+			##Assign photo ID into variable 'cameraID'
+			locationID = locationID_data[0] 
 		
 		##end if else
 
@@ -121,15 +128,18 @@ def insert_data(mtime, mdata, photoPath):
 			'locationID' : locationID,
 		}
 
-
-		cursor.execute(SelectCameraID, data_camera) ##Select camera ID
+		##Select camera ID
+		cursor.execute(SelectCameraID, data_camera) 
 		cameraID_data = cursor.fetchone()
 		if cameraID_data is None:
 			cursor.execute(add_camera, data_camera)
-			cursor.execute(SelectCameraID, data_camera) ##Select camera ID
-			cameraID = cursor.fetchone()[0] ##Assign photo ID into variable 'cameraID'
+			##Select camera ID
+			cursor.execute(SelectCameraID, data_camera) 
+			##Assign photo ID into variable 'cameraID'
+			cameraID = cursor.fetchone()[0] 
 		elif cameraID_data is not None:
-			cameraID = cameraID_data[0] ##Assign photo ID into variable 'cameraID'
+			##Assign photo ID into variable 'cameraID'
+			cameraID = cameraID_data[0] 
 		
 		##end if else
 
@@ -139,34 +149,44 @@ def insert_data(mtime, mdata, photoPath):
 			'cameraid'  : cameraID,
 		}
 
+		##add photo into database with its path
+		cursor.execute(add_photo, data_photo) 
+		##Select related photo's id
+		cursor.execute(selectPhotoID) 
+		##Assign related photo's id into variable 'photoid'
+		photoid = cursor.fetchone()[0] 
 
-		cursor.execute(add_photo, data_photo) ##add photo into database with its path
-		cursor.execute(selectPhotoID) ##Select related photo's id
-		photoid = cursor.fetchone()[0] ##Assign related photo's id into variable 'photoid'
-
-		cursor.execute(selectStatID) ##Select related status ID
-		statID  = cursor.fetchone()[0] ##Assign related status ID into variable 'statID'
-
-		cursor.execute(SelectUnitID) ##Select related unit ID
-		unitid_data = cursor.fetchone() ##Assign related unit ID into variable unitID
+		##Select related status ID
+		cursor.execute(selectStatID) 
+		##Assign related status ID into variable 'statID'
+		statID  = cursor.fetchone()[0] 
+		
+		##Select related unit ID
+		cursor.execute(SelectUnitID) 
+		##Assign related unit ID into variable unitID
+		unitid_data = cursor.fetchone() 
 		if unitid_data is None:
 			cursor.execute(add_unit)
-			cursor.execute(SelectUnitID) ##Select unit ID
-			unitid = cursor.fetchone()[0] ##Assign unit ID into variable 'unitid'
+			##Select unit ID
+			cursor.execute(SelectUnitID) 
+			##Assign unit ID into variable 'unitid'
+			unitid = cursor.fetchone()[0] 
 		elif unitid_data is not None:
-			unitid = unitid_data[0] ##Assign photo ID into variable 'cameraID'
+			##Assign photo ID into variable 'cameraID'
+			unitid = unitid_data[0] 
 
 
-
-		data_measurement= {  	##data of measurement will insert into database
+		##data of measurement will insert into database
+		data_measurement= {  	
 			'm_time'  : mtime,
 			'statusID': statID,
 			'm_data'  : mdata,
 			'unitID'  : unitid,
 			'photoID' : photoid,
 		}
-
-		cursor.execute(add_measurement, data_measurement) ##Select ID of statcode from MStatus table
+		
+		##Select ID of statcode from MStatus table
+		cursor.execute(add_measurement, data_measurement) 
 
 		con.commit() ##try to commit operation
 		cursor.close() ##close the cursor
