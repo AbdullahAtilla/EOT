@@ -1,9 +1,9 @@
 import cv2
 import time
 import os.path
-import ConfigParser
+import configparser
 
-config = ConfigParser.RawConfigParser()
+config = configparser.RawConfigParser()
 config.read("config/config.ini")
 
 ##This variable keeps info whether if captured images will store at file. 
@@ -22,10 +22,10 @@ def camChoise():
 ## end of the function
 ############################################################################################
 
-
-
 ##This function capture image via camera, and save them into 'captured_img' folder.
 def get_image():
+	# imgLocation is stores image location
+	imgLocation = "the image has not stored"
 	# open the camera 
 	cap = cv2.VideoCapture(camChoise()) 
 	# Capture frame-by-frame
@@ -47,18 +47,21 @@ def get_image():
 
 	if success:
 		##If store image option has true;
-		if storeimg == True:
+		if storeimg: ##If the user wants to store image
 			# save image backup to the path
 			cv2.imwrite('captured_img/%d.png' % (imgID), frame)
+			imgLocation = str('captured_img/%d.png' % (imgID))
 		##Then, 
 		# save the current image to the path
 		cv2.imwrite('captured_img/last.png', frame) 
-		cv2.waitKey(200)
+		cv2.waitKey(200)	
 		
 		# When everything done, release the capture
 		cap.release() 
 		cv2.destroyAllWindows()
 
-	return str('captured_img/%d.png' % (imgID))
+	return imgLocation
 ###### end of the function
 #################################################################################################
+
+get_image()
