@@ -21,55 +21,75 @@ SCALAR_GREEN = (0.0, 255.0, 0.0)
 SCALAR_RED = (0.0, 0.0, 255.0)
 ###################################################################################################
 def main():
-
-    timeInterval = int(ConfigManager.ConfigSectionMap("Basic_Conf")['timeinterval']) ##Assign time interval into variable from config/config.ini file
-    threading.Timer(timeInterval, main).start()    ## called main() function every 'timeInterval' seconds
+    
+    ##Assign time interval into variable from config/config.ini file
+    timeInterval = int(ConfigManager.ConfigSectionMap("Basic_Conf")['timeinterval']) 
+    
+    ## calls main() function every 'timeInterval' seconds
+    threading.Timer(timeInterval, main).start()
     
     cv2.useOptimized();
-    blnKNNTrainingSuccessful = DetectChars.loadKNNDataAndTrainKNN()         # attempt KNN training
+    # attempt KNN training
+    blnKNNTrainingSuccessful = DetectChars.loadKNNDataAndTrainKNN()
 
-    if blnKNNTrainingSuccessful == False:                               # if KNN training was not successful
-        print("\nerror: KNN traning was not successful\n")               # show error message
-        return                                                          # and exit program
+
+    # if KNN training was not successful
+    if blnKNNTrainingSuccessful == False:      
+        # show error message                         
+        print("\nerror: KNN traning was not successful\n")  
+        # and exit program             
+        return                                                          
     # end if
 
-    photo_path = PiCamManager.get_Pimage() ##open camera and capture image
-    imgOriginalScene  = cv2.imread("captured_img/last.png")  # open captured image from directory
 
+    ##open camera and capture image
+    photo_path = PiCamManager.get_image() 
+    # open captured image from directory
+    imgOriginalScene  = cv2.imread("captured_img/last.png")  
 
-    if imgOriginalScene is None:                            # if image was not read successfully
-        print("\nerror: image not read from file \n\n")     # print error message to std out
-        os.system("pause")                                  # pause so user can see error message
-        return                                              # and exit program
+    # if image was not read successfully
+    if imgOriginalScene is None:                       
+        # print error message to std out     
+        print("\nerror: image not read from file \n\n")
+        # pause so user can see error message
+        os.system("pause") 
+        # and exit program                                 
+        return                                              
     # end if
 
-    listOfPossiblePlates = DetectPlates.detectPlatesInScene(imgOriginalScene)           # detect plates
+    # detect plates
+    listOfPossiblePlates = DetectPlates.detectPlatesInScene(imgOriginalScene)           
+    # detect chars in plates
+    listOfPossiblePlates = DetectChars.detectCharsInPlates(listOfPossiblePlates)        
 
-    listOfPossiblePlates = DetectChars.detectCharsInPlates(listOfPossiblePlates)        # detect chars in plates
-
-
-    if len(listOfPossiblePlates) == 0:                          # if no plates were found
-        print("\nno plates were detected\n")             # inform user no plates were found
-    else:                                                       # else
-                # if we get in here list of possible plates has at leat one plate
-
-                # sort the list of possible plates in DESCENDING order (most number of chars to least number of chars)
+    # if no plates were found
+    if len(listOfPossiblePlates) == 0:      
+        # inform user no plates were found                    
+        print("\nno plates were detected\n")             
+    else:                                                       
+        # if we get in here list of possible plates has at least one plate
+        # sort the list of possible plates in DESCENDING order (most number of chars to least number of chars)
         listOfPossiblePlates.sort(key = lambda possiblePlate: len(possiblePlate.strChars), reverse = True)
 
-                # suppose the plate with the most recognized chars (the first plate in sorted by string length descending order) is the actual plate
+        # suppose the plate with the most recognized chars (the first plate in sorted by string length descending order) is the actual plate
         licPlate = listOfPossiblePlates[0]
-        
-        if len(licPlate.strChars) == 0:                     # if no chars were found in the plate
-            print("\nno characters were detected\n\n")       # show message
-            return                                          # and exit program
+
+        # if no chars were found in the plate
+        if len(licPlate.strChars) == 0:       
+            # show message              
+            print("\nno characters were detected\n\n")
+            # and exit program       
+            return                                          
         # end if
 
-        print("\ncharacters read from image = " + licPlate.strChars + "\n")       # write license plate text to std out
+        # write license plate text to std out
+        print("\ncharacters read from image = " + licPlate.strChars + "\n")       
         print("----------------------------------------")
 
-
-        mTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')  ##assign timestamp of measurement to variable 'mTime'
-        DBManager.insert_data(mTime, int(licPlate.strChars), photo_path) ##insert data into database; timestamp - measured data - photo path
+        # assign timestamp of measurement to variable 'mTime'
+        mTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')  
+        # insert data into database; timestamp - measured data - photo path
+        DBManager.insert_data(mTime, int(licPlate.strChars), photo_path) 
 
     # end if else
 
