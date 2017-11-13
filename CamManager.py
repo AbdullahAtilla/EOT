@@ -1,9 +1,9 @@
 import cv2
 import time
 import os.path
-import configparser
+import ConfigParser
 
-config = configparser.RawConfigParser()
+config = ConfigParser.RawConfigParser()
 config.read("config/config.ini")
 
 ##This variable keeps info whether if captured images will store at file. 
