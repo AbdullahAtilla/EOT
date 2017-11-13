@@ -1,5 +1,5 @@
 #Ignore files in this directory
 *.pyc
 __pycache__/
-test/
+test
 
